@@ -3,7 +3,7 @@ pipeline
     agent any
     stages
     {
-        stage('ContinuousDownload-Master')
+        stage('ContinuousDownload')
         {
             steps
             {
@@ -11,18 +11,17 @@ pipeline
                 {
                     try
                     {
-                         git 'https://github.com/intelliqittrainings/maven.git'
+                     git 'https://github.com/medamshiva20/JavaProject.git'   
                     }
                     catch(Exception e1)
                     {
-                        mail bcc: '', body: 'Jenkins is unable to download the code from remote git server', cc: '', from: '', replyTo: '', subject: 'Download failed', to: 'git.team@gmail.com'
+                        mail bcc: '', body: 'Download the code from git hub', cc: '', from: '', replyTo: '', subject: 'Download the code', to: 'gitadmin@outlook.com'
                         exit(1)
                     }
                 }
-               
             }
         }
-        stage('ContinuousBuild-Master')
+        stage('ContinuousBuild')
         {
             steps
             {
@@ -30,19 +29,17 @@ pipeline
                 {
                     try
                     {
-                          sh label: '', script: 'mvn package'
+                        sh label: '', script: 'mvn package'
                     }
                     catch(Exception e2)
                     {
-                        mail bcc: '', body: 'Jenkins is unable to create an artifact from the code', cc: '', from: '', replyTo: '', subject: 'Build failed', to: 'developement.team@gmail.com'
-                        exit(1)
+                       mail bcc: '', body: 'Build the code ', cc: '', from: '', replyTo: '', subject: 'Build the code', to: 'build@outlook.com'
+                       exit(1)
                     }
                 }
-            
             }
-                
         }
-        stage('ContinuousDeployment-Master')
+        stage('ContinuousDeployment')
         {
             steps
             {
@@ -50,19 +47,17 @@ pipeline
                 {
                     try
                     {
-                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.37.220:/var/lib/tomcat8/webapps/testwebapp.war'
+                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Decpipeline2/webapp/target/webapp.war ubuntu@172.31.60.100:/var/lib/tomcat8/webapps/dtapp2.war'
                     }
                     catch(Exception e3)
                     {
-                        mail bcc: '', body: 'Jenkins is unable to deploy into tomcat on QAServers', cc: '', from: '', replyTo: '', subject: 'Deployment failed', to: 'middleware.team@gmail.com'
+                        mail bcc: '', body: 'Deploy the code', cc: '', from: '', replyTo: '', subject: 'Deploy the code', to: 'deploy@outlook.com'
                         exit(1)
                     }
                 }
-                
             }
-            
         }
-        stage('ContinuousTesting-Master')
+        stage('ContinuousTesting')
         {
             steps
             {
@@ -70,37 +65,34 @@ pipeline
                 {
                     try
                     {
-                         git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
-                sh label: '', script: 'java -jar /home/ubuntu/.jenkins/workspace/DeclarativePipeline/testing.jar'
+                        git 'https://github.com/medamshiva20/FunctionalTesting.git'
+                        sh label: '', script: 'java -jar /home/ubuntu/.jenkins/workspace/Decpipeline2/testing.jar'
                     }
                     catch(Exception e4)
                     {
-                        mail bcc: '', body: 'Selenium Test scripts have failed', cc: '', from: '', replyTo: '', subject: 'Testing failed', to: 'qa.team@gmail.com'
+                        mail bcc: '', body: 'Testing the application', cc: '', from: '', replyTo: '', subject: 'Testing the application', to: 'testing@outlook.com'
                         exit(1)
                     }
                 }
-               
             }
         }
-        stage('ContinuousDelivery-Master')
+        stage('ContinuousDelivery')
         {
-           steps
-           {
-               script
-               {
-                   try
-                   {
-                      
-               sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.36.172:/var/lib/tomcat8/webapps/prodwebapp.war'
-                   }
-                   catch(Exception e5)
-                   {
-                       mail bcc: '', body: 'Delivery into the prod servers has failed', cc: '', from: '', replyTo: '', subject: 'Delivery failed', to: 'delivery.team@gmail.com'
-                   }
-               }
-               
-           }
+            steps
+            {
+                script
+                {
+                    try
+                    {
+                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Decpipeline2/webapp/target/webapp.war ubuntu@172.31.62.253:/var/lib/tomcat8/webapps/dpapp2.war'
+                    }
+                    catch(Exception e5)
+                    {
+                        mail bcc: '', body: 'Deliver the application', cc: '', from: '', replyTo: '', subject: 'Deliver the application', to: 'delivery@outlook.com'
+                        exit(1)
+                    }
+                }
+            }
         }
     }
-    
 }
