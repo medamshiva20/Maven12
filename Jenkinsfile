@@ -47,7 +47,7 @@ pipeline
                 {
                     try
                     {
-                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Decpipeline2/webapp/target/webapp.war ubuntu@172.31.60.100:/var/lib/tomcat8/webapps/dtapp2.war'
+                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Decpipeline2/webapp/target/webapp.war ubuntu@172.31.60.100:/var/lib/tomcat8/webapps/dtapp22.war'
                     }
                     catch(Exception e3)
                     {
@@ -84,7 +84,7 @@ pipeline
                 {
                     try
                     {
-                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Decpipeline2/webapp/target/webapp.war ubuntu@172.31.62.253:/var/lib/tomcat8/webapps/dpapp2.war'
+                        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Decpipeline2/webapp/target/webapp.war ubuntu@172.31.62.253:/var/lib/tomcat8/webapps/dpapp22.war'
                     }
                     catch(Exception e5)
                     {
