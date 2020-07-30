@@ -1,6 +1,6 @@
 <html>
 <body>
-<h1>Welcome To Siva Medam</h1>
+<h1>Welcome To Siva</h1>
 </body>
 <body style="color:red;">
  <div class="container">
